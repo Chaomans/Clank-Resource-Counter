@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Resource from "../../components/Resource/Resource";
+import styles from "./Home.module.scss";
 
 export type Resources = {
   skill: number;
@@ -15,30 +16,47 @@ const Home = () => {
     attack: 0,
     boot: 0,
   });
-  const [amount, setAmount] = useState<Resources>(defaultAmount);
+  const [amount, setAmount] = useState<Resources>({ ...defaultAmount });
 
-  // const handleChangeDefaultAmount = (value: number, name: string) => {
-  //   const newDefaultAmount = amount;
-  //   newDefaultAmount[name as ResourceKey] = value;
-  //   setDefaultAmount(newDefaultAmount);
-  // };
+  const handleChangeAmount = (value: number, name: string) => {
+    const newAmount = amount;
+    newAmount[name as ResourceKey] = value;
+    console.log(newAmount);
+    setAmount({ ...newAmount });
+  };
 
-  useEffect(() => {}, [amount, defaultAmount]);
+  const resetValues = () => {
+    setAmount({ ...defaultAmount });
+  };
 
   return (
-    <main>
-      <h1>
-        Clank!
+    <main className={styles.main}>
+      <h1 className={styles.title}>
+        <em>Clank!</em>
         <br />
         Resource Counter
       </h1>
-      <div className="resources">
-        <Resource amounts={amount} setAmount={setAmount} name="skill" />
-        <Resource amounts={amount} setAmount={setAmount} name="attack" />
-        <Resource amounts={amount} setAmount={setAmount} name="boot" />
+      <div className={styles.resources}>
+        <Resource
+          amount={amount.skill}
+          onChangeAmount={handleChangeAmount}
+          name="skill"
+        />
+        <Resource
+          amount={amount.attack}
+          onChangeAmount={handleChangeAmount}
+          name="attack"
+        />
+        <Resource
+          amount={amount.boot}
+          onChangeAmount={handleChangeAmount}
+          name="boot"
+        />
       </div>
-      <button>Reset</button>
-      <p>&copy; Chaomans - 2024</p>
+      <button onClick={resetValues} className={styles.reset}>
+        Reset
+      </button>
+      <p className={styles.copyright}>&copy; Chaomans - 2024</p>
     </main>
   );
 };

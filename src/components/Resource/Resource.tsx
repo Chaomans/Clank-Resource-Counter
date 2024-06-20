@@ -1,30 +1,18 @@
-import { useState } from "react";
-import { ResourceKey, Resources } from "../../pages/Home/Home";
+import styles from "./Resource.module.scss";
 
 type ResourceProps = {
   name: string;
-  amounts: Resources;
-  setAmount: React.Dispatch<Resources>;
+  amount: number;
+  onChangeAmount: (value: number, name: string) => void;
 };
 
-const Resource = ({ name, amounts, setAmount }: ResourceProps) => {
-  const [currentAmount, setCurrentAmount] = useState<number>(
-    amounts[name as ResourceKey]
-  );
-
-  const onChangeAmount = (value: number) => {
-    const newAmount = amounts;
-    newAmount[name as ResourceKey] = value;
-    setAmount(newAmount);
-    setCurrentAmount(value);
-  };
-
+const Resource = ({ name, amount, onChangeAmount }: ResourceProps) => {
   return (
-    <div className="resource">
+    <div className={styles.resource}>
       <button
-        className="remove"
+        className={styles.remove}
         onClick={() =>
-          currentAmount === 0 ? () => {} : onChangeAmount(currentAmount - 1)
+          amount === 0 ? () => {} : onChangeAmount(amount - 1, name)
         }
       >
         -
@@ -32,13 +20,21 @@ const Resource = ({ name, amounts, setAmount }: ResourceProps) => {
       <input
         type="number"
         pattern="[0-9]*"
-        value={amounts[name as ResourceKey]}
-        onChange={(e) => onChangeAmount(parseInt(e.target.value))}
+        value={amount}
+        className={styles.input}
+        onChange={(e) => onChangeAmount(parseInt(e.target.value), name)}
       />
-      <div className="resource_icon">
-        <img src={`/assets/${name}.png`} alt={`icon for ${name}`} />
+      <div className={styles.resourceIcon}>
+        <img
+          className={styles.img}
+          src={`/assets/${name}.png`}
+          alt={`icon for ${name}`}
+        />
       </div>
-      <button className="add" onClick={() => onChangeAmount(currentAmount + 1)}>
+      <button
+        className={styles.add}
+        onClick={() => onChangeAmount(amount + 1, name)}
+      >
         +
       </button>
     </div>

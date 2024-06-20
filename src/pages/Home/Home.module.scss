@@ -1,0 +1,45 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: url("/assets/bgc-img.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 30px 0;
+
+  .title {
+    text-align: center;
+    font-family: "Clank_Title";
+    font-size: 45px;
+    text-shadow: 2px 2px #f3f3f3;
+  }
+
+  .resources {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+  }
+
+  .reset {
+    font-family: "Clank";
+    font-weight: 700;
+    font-size: 20px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #dddddd;
+  }
+
+  .copyright {
+    font-family: "Clank";
+    font-weight: 600;
+    font-size: 20px;
+  }
+}

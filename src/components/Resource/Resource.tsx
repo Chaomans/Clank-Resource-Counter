@@ -27,7 +27,7 @@ const Resource = ({ name, amount, onChangeAmount }: ResourceProps) => {
       <div className={styles.resourceIcon}>
         <img
           className={styles.img}
-          src={`/assets/${name}.png`}
+          src={`assets/${name}.png`}
           alt={`icon for ${name}`}
         />
       </div>
